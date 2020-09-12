@@ -8,10 +8,6 @@ edition = "2018"
 name = "temptation"
 crate_type = ["dylib"]
 
-#[dependencies.redhook]
-#path = "../../geofft/redhook"
-#url = "https://github.com/geofft/redhook"
-
 [dependencies]
 libc = "0.2.77"
 log = "0.4.11"
