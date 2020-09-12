@@ -1,0 +1,19 @@
+[package]
+name = "temptation"
+version = "0.1.0"
+authors = ["n01e0 <noleo@vanillabeans.mobi>"]
+edition = "2018"
+
+[lib]
+name = "temptation"
+crate_type = ["dylib"]
+
+#[dependencies.redhook]
+#path = "../../geofft/redhook"
+#url = "https://github.com/geofft/redhook"
+
+[dependencies]
+libc = "0.2.77"
+log = "0.4.11"
+env_logger = "0.7.1"
+redhook = "1.0.0"
