@@ -4,9 +4,9 @@ extern crate libc;
 extern crate redhook;
 
 use env_logger;
-use log::{error, warn, info};
-use libc::{c_int, c_char, c_long};
-use std::{fs, env};
+use libc::{c_char, c_int};
+use log::{error, info, warn};
+use std::{env, fs};
 
 redhook::hook! {
     unsafe fn fexecve(fd: c_int, argv: *mut *mut c_char, envp: *mut *mut c_char) -> c_int => detect_fileless {
@@ -30,4 +30,3 @@ redhook::hook! {
         real!(fexecve)(fd, argv, envp)
     }
 }
-
