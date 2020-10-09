@@ -10,12 +10,12 @@ use std::io::{Read, Write};
 use std::{env, fs, process};
 
 hook! {
-    unsafe fn fexecve(fd: c_int, argv: *mut *mut c_char, envp: *mut *mut c_char) -> c_int => detect_fileless {
+    unsafe fn fexecve(fd: c_int, argv: *mut *mut c_char, envp: *mut *mut c_char) -> c_int => detect_fexecve {
         if let Err(_) = env::var("RUST_LOG") {
             env::set_var("RUST_LOG", "warn");
         }
         if let Err(_) = env::var("ACTION") {
-            env::set_var("ACTION", "abort");
+            env::set_var("ACTION", "dump");
         }
         env_logger::init();
         info!("hook fexecve!");
@@ -42,7 +42,7 @@ hook! {
                         process::exit(0);
                     },
                     _ => {
-                        info!("detected only");
+                        info!("detected fileless exec");
                     }
                 }
             },
