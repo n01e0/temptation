@@ -12,4 +12,4 @@ crate_type = ["dylib"]
 libc = "0.2.77"
 log = "0.4.11"
 env_logger = "0.7.1"
-redhook = "1.0.0"
+redhook = { git = "https://github.com/n01e0/redhook" }

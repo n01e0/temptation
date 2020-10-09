@@ -7,6 +7,6 @@ all:
 test: fileless_sample
 	LD_PRELOAD=./target/debug/libtemptation.so ./fileless_sample
 
-clean: fileless_sample
+clean:
 	rm fileless_sample
 

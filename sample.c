@@ -12,5 +12,5 @@ int main() {
         err(1, "memfd_create");
     write(fd, hello, strlen(hello));
     if (fexecve(fd, (char *[]){"script", NULL}, (char*[]){NULL}) == -1   )
-        perror("fexecve");
+        err(1, "fexecve");
 }
