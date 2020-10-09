@@ -6,8 +6,8 @@ extern crate redhook;
 use env_logger;
 use libc::{c_char, c_int};
 use log::{error, info, warn};
-use std::io::Read;
-use std::{env, fs};
+use std::io::{Read, Write};
+use std::{env, fs, process};
 
 hook! {
     unsafe fn fexecve(fd: c_int, argv: *mut *mut c_char, envp: *mut *mut c_char) -> c_int => detect_fileless {
@@ -35,7 +35,11 @@ hook! {
                         let mut buf = Vec::new();
                         let mut f = fs::File::open(path).unwrap();
                         f.read_to_end(&mut buf).unwrap();
-                        warn!("{:?}", buf);
+                        let dump = format!("{}.dump", process::id());
+                        warn!("binary dump to -> {}", dump);
+                        let mut f = fs::File::create(dump).unwrap_or_else(|e| { error!("{}", e); process::exit(1); });
+                        f.write_all(&buf).unwrap_or_else(|e| { error!("{}", e); process::exit(1); });
+                        process::exit(0);
                     },
                     _ => {
                         info!("detected only");
