@@ -41,9 +41,7 @@ hook! {
                         f.write_all(&buf).unwrap_or_else(|e| { error!("{}", e); process::exit(1); });
                         process::exit(0);
                     },
-                    _ => {
-                        info!("detected fileless exec");
-                    }
+                    _ => info!("detected fileless exec"),
                 }
             },
             Err(e) => {
